@@ -17,9 +17,38 @@ def print_values(list_node)
   end
 end
 
+def is_infinite(list_node)
+  if list_node && list_node.next_node
+    tortoise = list_node
+    hare = list_node.next_node
+  else
+    return false
+  end
+
+  while tortoise && hare
+    if tortoise == hare
+      return true
+    end
+
+    if list_node && list_node.next_node && list_node.next_node.next_node
+      tortoise = tortoise.next_node
+      hare = hare.next_node.next_node
+    else
+      return false
+    end
+  end
+
+  return false
+end
+
 node1 = LinkedListNode.new(37)
 node2 = LinkedListNode.new(99, node1)
 node3 = LinkedListNode.new(12, node2)
-node1.next_node = node3
+node4 = LinkedListNode.new(50, node3)
+node5 = LinkedListNode.new(38, node4)
 
-print_values(node3)
+puts "#{is_infinite(node5)}"
+
+node1.next_node = node5
+
+puts "#{is_infinite(node5)}"
